@@ -1,14 +1,14 @@
 // import { useState, useEffect } from "react";
-import ContactList from "./components/ContactList/ContactList";
+import ContactList from "../ContactList/ContactList";
 import css from "./App.module.css";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactForm from "./components/ContactForm/ContactForm";
-import Loader from "./components/Loader/Loader";
-import Error from "./components/Error/Error";
+import SearchBox from "../SearchBox/SearchBox";
+import ContactForm from "../ContactForm/ContactForm";
+import Loader from "../Loader/Loader";
+import Error from "../Error/Error";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from './redux/contactsOps';
-import { selectContacts, selectIsLoading, selectIsError } from './redux/contactsSlice';
+import { fetchContacts } from '../../redux/contactsOps';
+import { selectContacts, selectIsLoading, selectIsError } from '../../redux/contactsSlice';
 
 export default function App() {
   // Використовується useSelector для отримання значення властивостей з Redux-стану.
