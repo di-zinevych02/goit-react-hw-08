@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://67f97425094de2fe6ea19b87.mockapi.io';
+//коли додаємо в будь-якому місці axios.defaults.baseURL то цей юрл буде використовуватись у всіх http запитах у нашому додатку де використ аксіос, тому дублювати не потрібно
+axios.defaults.baseURL = 'https://connections-api.goit.global';
 //Екшени які диспатчаться, вони зберігаються в операції
 // Перед запитом: tasks/fetchTasks/pending
 // Після успішного запиту: tasks/fetchTasks/fulfilled

@@ -1,39 +1,26 @@
-// import { useState, useEffect } from "react";
-import ContactList from "../ContactList/ContactList";
-import css from "./App.module.css";
-import SearchBox from "../SearchBox/SearchBox";
-import ContactForm from "../ContactForm/ContactForm";
+
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Layout from '../Layout/Layout';
 import Loader from "../Loader/Loader";
-import Error from "../Error/Error";
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchContacts } from '../../redux/contactsOps';
-import { selectContacts, selectIsLoading, selectIsError } from '../../redux/contactsSlice';
+
+// асинхронне завантаження компонента відповідної сторінки а Suspense відображається поки завантажується відповідна стр
+// const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+// const RegisterPage = lazy(() => import('../../pages/RegisterPage/RegisterPage'));
+// const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
+// const ContactsPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
 
 export default function App() {
-  // Використовується useSelector для отримання значення властивостей з Redux-стану.
-  const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
-
-  const dispatch = useDispatch();
-  //коли ми диспатчимо операцію у нас викликається асинхронна функція 
-  //робимо запит за даними
-  //фетчимо дані до того, як завантажиться ContactList
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-
   return (
-    <div className={css.maincontainer}>
-      <h1 className={css.headtitile}>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      {isLoading && <Loader />}
-      {isError && <Error />}
-      {contacts.length > 0 && <ContactList />}
-    </div>
+    <Layout>
+      {/* <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+        </Routes>
+      </Suspense> */}
+    </Layout>
   );
 }
-

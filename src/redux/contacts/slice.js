@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 //зміна слайс зберігає те що повертає функція createSlice, результат виклику цієї фунції
-import { fetchContacts, addContact, deleteContact } from './contactsOps';
+import { fetchContacts, addContact, deleteContact } from './operations';
 
 
 const handlePending = state => {
