@@ -1,0 +1,35 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  --primary-light: #f3eaff;
+    --primary: #d3c1f8;
+    --primary-dark: #b9a0e6;
+    --primary-darker: #9b7dcf;
+  
+    --secondary-light: #e6faff;
+    --secondary: #b3ecf5;
+    --secondary-dark: #84dce8;
+    --secondary-darker: #4ac6d6;
+  
+    --text-dark: #2e2e2e;
+    --text-light: #ffffff;
+    
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  place-items: center;
+
+}
+
+

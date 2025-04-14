@@ -1,0 +1,55 @@
+.headtitile {
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.2;
+
+  color: var(--primary-darker);
+text-align: center;
+  /* Mobile (default) */
+  font-size: 24px;
+
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .headtitile {
+    font-size: 32px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .headtitile {
+    font-size: 40px;
+  }
+} 
+/* max-width  та margin: 0 auto — центрування по ширині. */
+.maincontainer {
+  max-width: 100%;
+  padding: 20px 16px;
+  /* Відступи з усіх боків */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: #2a2a2a;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .maincontainer {
+    padding: 32px 24px;
+    gap: 32px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .maincontainer {
+    max-width: 960px;
+    padding: 48px;
+    gap: 40px;
+  }
+}
+

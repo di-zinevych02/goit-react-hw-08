@@ -1,0 +1,76 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    width: 90%;
+    max-width: 400px;
+
+    background-color: var(--primary-light);
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Текст над інпутом */
+.findcontact {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+/* Інпут */
+.inputcontact {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: var(--text-dark);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputcontact:focus {
+    outline: none;
+    border-color: var(--primary-darker);
+    box-shadow: 0 0 5px var(--primary-darker);
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+    .filter {
+        padding: 32px;
+        max-width: 500px;
+    }
+
+    .findcontact {
+        font-size: 18px;
+    }
+
+    .inputcontact {
+        font-size: 18px;
+        padding: 12px 14px;
+    }
+}
+
+/* DESKTOP */
+@media (min-width: 1280px) {
+    .filter {
+        padding: 40px;
+        max-width: 600px;
+    }
+
+    .findcontact {
+        font-size: 20px;
+    }
+
+    .inputcontact {
+        font-size: 20px;
+        padding: 14px 16px;
+    }
+}

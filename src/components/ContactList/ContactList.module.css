@@ -1,0 +1,50 @@
+.contactslist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: grid;
+        grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Кожен елемент списку */
+.item {
+    width: 100%;
+    max-width: 340px;
+}
+
+/* Повідомлення, якщо немає контактів */
+.nocontacts {
+    font-size: 16px;
+    color: #999;
+    padding: 24px 0;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .contactslist {
+        gap: 20px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .item {
+        max-width: 500px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+    .contactslist {
+        gap: 24px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .item {
+        max-width: 600px;
+    }
+}
