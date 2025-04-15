@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut } from "./operations";
+import { register, logIn, logOut, refreshUser } from "./operations";
 
 const handlePending = state => {
     state.loading = true;
@@ -41,9 +41,29 @@ const authSlice = createSlice({
             .addCase(register.rejected, handleRejected)
             //обробка екшену логіну
             .addCase(logIn.pending, handlePending)
-            .addCase(logIn.fulfilled, handlePending)
+            .addCase(logIn.fulfilled, handleFulfilled)
             .addCase(logIn.rejected, handleRejected)
 
+            .addCase(logOut.pending, handlePending)
+            //очищаємо стан даних про користувача
+            .addCase(logOut.fulfilled, (state) => {
+                state.user = { name: null, email: null };
+                state.token = null;
+                state.isLoggedIn = false;
+            })
+            .addCase(refreshUser.pending, (state) => {
+                state.isRefreshing = true;
+                
+            })
+            .addCase(refreshUser.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoggedIn = true;
+                state.isRefreshing = false;
+            })
+            .addCase(refreshUser.rejected, (state, action) => {
+                state.isRefreshing = false;
+                state.error = action.payload;
+            })
     
 });
 

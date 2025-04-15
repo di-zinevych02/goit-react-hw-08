@@ -9,7 +9,7 @@ const slice = createSlice({
     reducers: {
         changeNameFilter(state, action) {
             
-            state.name = action.payload.toLowerCase();
+            state.name = action.payload.toLowerCase() || "";
             
         },
     },

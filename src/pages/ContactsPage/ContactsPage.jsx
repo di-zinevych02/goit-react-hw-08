@@ -1,20 +1,19 @@
 // import { useState, useEffect } from "react";
 import ContactList from "../../components/ContactList/ContactList";
-import css from "./App.module.css";
+import css from "./ContactsPage.module.css";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import Loader from "../../components/Loader/Loader";
-import Error from "../../components/Error/Error";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contacts/operations';
-import { selectContacts, selectIsLoading, selectIsError } from '../../redux/contacts/selectors';
+import { selectContacts, selectIsLoading} from '../../redux/contacts/selectors';
 
 export default function App() {
   // Використовується useSelector для отримання значення властивостей з Redux-стану.
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
+
 
   const dispatch = useDispatch();
   //коли ми диспатчимо операцію у нас викликається асинхронна функція 
@@ -30,8 +29,7 @@ export default function App() {
       <h1 className={css.headtitile}>Phonebook</h1>
       <ContactForm />
       <SearchBox />
-      {isLoading && <Loader />}
-      {isError && <Error />}
+      {isLoading && <Loader /> }
       {contacts.length > 0 && <ContactList />}
     </div>
   );

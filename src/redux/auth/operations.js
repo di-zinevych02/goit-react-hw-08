@@ -50,6 +50,26 @@ export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI
  *
  * After a successful logout, remove the token from the HTTP header
  */
-export const logOut = createAsyncThunk('auth/logout', async () => {
-     
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+     try {
+    await axios.post('/users/logout');
+    // After a successful logout, remove the token from the HTTP header
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
+//оновлення користувача
+export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
+    try {
+        //обєкт стану contacts auth and filters
+        const reduxState = thunkAPI.getState();
+        //reduxState.auth.token
+        setAuthHeader(`Bearer ${reduxState.auth.token}`);
+        const response = await axios.get('/users/current');
+        // буде обєкт нашого юзера
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});
+//автоматично редакс персист витягує токін з локал стор і пише його в редакс і  при монтуванні App() диспатчимо операцію, а операція refreshUser отримує токен зі стана поточного і відправляє запит на бекенд

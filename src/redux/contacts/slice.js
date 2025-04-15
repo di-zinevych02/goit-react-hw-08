@@ -1,4 +1,5 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { logOut } from '../auth/operations';
 //зміна слайс зберігає те що повертає функція createSlice, результат виклику цієї фунції
 import { fetchContacts, addContact, deleteContact } from './operations';
 
@@ -44,13 +45,18 @@ const slice = createSlice({
             .addCase(addContact.rejected, handleRejected)
         
             //обробка екшену видалення
-
+            .addCase(deleteContact.pending, handlePending)
             .addCase(deleteContact.fulfilled, (state, action) => {
                 // функція filter дозволяє стаоврити новий масив, що містить лише ті завдання, id яких не збігається з id завдання, яке видалено (action.payload.id)
                 state.items = state.items.filter((contact) => contact.id !== action.payload.id);
-
+                 
             
                 // Таким чином, коли редюсер отримує дію, він може отримати значення з action.payload і використовувати його для обчислення нового стану.
+            })
+            .addCase(deleteContact.rejected, handleRejected)
+            //очищаємо дані при виходу з профілю самого користувача, його приватні колекції
+            .addCase(logOut.fulfilled, (state) => {
+                state. items = [];
             });
     },
 });

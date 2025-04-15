@@ -1,5 +1,5 @@
 import css from "./Error.module.css";
-export default function ErrorMessage({ error }) {
+export default function ErrorMessage() {
   return (
     <div className={css.error}>
       <p className={css.texterror}>
