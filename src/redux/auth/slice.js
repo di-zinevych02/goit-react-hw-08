@@ -30,6 +30,7 @@ const authSlice = createSlice({
         token: null,
         //якщо користувач залогігин тру якщо ні фолс
         isLoggedIn: false,
+        // контролює стан оновлення користувача
         isRefreshing: false,
         loading: false,
         error: null,
@@ -60,6 +61,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = true;
                 state.isRefreshing = false;
             })
+            //якщо поганий токен, тобто якщо закінчили рефреш користувача
             .addCase(refreshUser.rejected, (state, action) => {
                 state.isRefreshing = false;
                 state.error = action.payload;

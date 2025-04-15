@@ -49,7 +49,7 @@ const slice = createSlice({
             .addCase(deleteContact.fulfilled, (state, action) => {
                 // функція filter дозволяє стаоврити новий масив, що містить лише ті завдання, id яких не збігається з id завдання, яке видалено (action.payload.id)
                 state.items = state.items.filter((contact) => contact.id !== action.payload.id);
-                 
+                 state.loading = false;
             
                 // Таким чином, коли редюсер отримує дію, він може отримати значення з action.payload і використовувати його для обчислення нового стану.
             })

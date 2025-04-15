@@ -29,8 +29,8 @@ export default function App() {
       <h1 className={css.headtitile}>Phonebook</h1>
       <ContactForm />
       <SearchBox />
-      {isLoading && <Loader /> }
-      {contacts.length > 0 && <ContactList />}
+      {isLoading ? (<Loader />) : (<ContactList />)}
+      
     </div>
   );
 }

@@ -17,8 +17,10 @@ const LoginSchema = Yup.object().shape({
 export default function LoginForm() {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(logIn(values));
+    const handleSubmit = (values, actions) => {
+        //.unwrap- метод, який дає доступ до проміса операції
+        //ВИКЛИК ТОСТУ
+        dispatch(logIn(values)).unwrap().then(() => console.log('Login success'));
     actions.resetForm();
   };
 

@@ -53,17 +53,20 @@ export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
      try {
     await axios.post('/users/logout');
-    // After a successful logout, remove the token from the HTTP header
+         // After a successful logout, remove the token from the HTTP header
+         setAuthHeader("");
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
 });
 //оновлення користувача
+//auth/refresh -базовий тип екшену, другий аргумент асинхронна функція, третій - обєкт налаштувань(опції-умова виконання операції)
 export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
     try {
         //обєкт стану contacts auth and filters
         const reduxState = thunkAPI.getState();
         //reduxState.auth.token
+        //якщо токен існує, потрібно робити запит, бо якщо в редакс стані був токен і він не записався це гарнатовано, що користувач незалогінений
         setAuthHeader(`Bearer ${reduxState.auth.token}`);
         const response = await axios.get('/users/current');
         // буде обєкт нашого юзера
@@ -71,5 +74,13 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
     }
-});
+}, {
+    //обєкт налаштувань(опції-умова виконання операції), функція, яка визначає запускається операція чи ні(при умові тру)
+    condition: (_, thunkAPI) => {
+        const reduxState = thunkAPI.getState();
+        // якщо немає токена, то запит робитись не буде
+        return reduxState.auth.token !== null;
+    },
+}
+);
 //автоматично редакс персист витягує токін з локал стор і пише його в редакс і  при монтуванні App() диспатчимо операцію, а операція refreshUser отримує токен зі стана поточного і відправляє запит на бекенд
