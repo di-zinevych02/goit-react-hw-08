@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { logOut } from '../auth/operations';
 //зміна слайс зберігає те що повертає функція createSlice, результат виклику цієї фунції
-import { fetchContacts, addContact, deleteContact } from './operations';
+import { fetchContacts, addContact, deleteContact, updateContact} from './operations';
 
 
 const handlePending = state => {
@@ -57,7 +57,17 @@ const slice = createSlice({
             //очищаємо дані при виходу з профілю самого користувача, його приватні колекції
             .addCase(logOut.fulfilled, (state) => {
                 state. items = [];
-            });
+            })
+        
+.addCase(updateContact.pending, handlePending)
+.addCase(updateContact.fulfilled, (state, action) => {
+  state.loading = false;
+  const index = state.items.findIndex(contact => contact.id === action.payload.id);
+  if (index !== -1) {
+    state.items[index] = action.payload;
+  }
+})
+.addCase(updateContact.rejected, handleRejected)
     },
 });
 

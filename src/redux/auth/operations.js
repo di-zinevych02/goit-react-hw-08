@@ -1,4 +1,5 @@
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 //після логіну та після реєстрації записуємо headers Authorization в аксіос axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
@@ -17,8 +18,20 @@ export const register = createAsyncThunk('auth/register', async (credentials, th
     try { 
         const response = await axios.post('/users/signup', credentials);
         setAuthHeader(`Bearer ${response.data.token}`);
+        toast.success('Registration successful!');
         return response.data;
     } catch (error) {
+            if (
+      error.response &&
+      (error.response.status === 400 || error.response.status === 409)
+    ) {
+      const message =
+        error.response.data?.message || 'User already exists. Please log in.';
+      toast.error(message);
+    } else {
+      toast.error('Registration failed. Try again!');
+            }
+        
         return thunkAPI.rejectWithValue(error.message);
     }
 
@@ -37,9 +50,17 @@ export const register = createAsyncThunk('auth/register', async (credentials, th
 export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
     try {
         const response = await axios.post('/users/login', credentials);
+        
         setAuthHeader(`Bearer ${response.data.token}`);
+        toast.success('Login successful!');
         return response.data;
     } catch (error) {
+        if (error.response && error.response.status === 400) {
+      const message = error.response.data?.message || 'Invalid email or password.';
+      toast.error(message);
+    } else {
+      toast.error('Login failed. Please try again later.');
+    }
         return thunkAPI.rejectWithValue(error.message);
     }
      
@@ -55,7 +76,9 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     await axios.post('/users/logout');
          // After a successful logout, remove the token from the HTTP header
          setAuthHeader("");
-  } catch (error) {
+         toast.success('Logout successful!');
+     } catch (error) {
+         toast.error('Logout failed. Please try again.');
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -68,10 +91,12 @@ export const refreshUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) 
         //reduxState.auth.token
         //якщо токен існує, потрібно робити запит, бо якщо в редакс стані був токен і він не записався це гарнатовано, що користувач незалогінений
         setAuthHeader(`Bearer ${reduxState.auth.token}`);
+       
         const response = await axios.get('/users/current');
         // буде обєкт нашого юзера
         return response.data;
     } catch (error) {
+        toast.error("Session expired. Please log in again.");
         return thunkAPI.rejectWithValue(error.message);
     }
 }, {

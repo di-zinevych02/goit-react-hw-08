@@ -1,6 +1,7 @@
 
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Toaster } from "react-hot-toast";
 import Layout from '../Layout/Layout';
 import Loader from "../Loader/Loader";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
@@ -24,11 +25,13 @@ export default function App() {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
+
   return isRefreshing ? (
     <Loader />
   ) : (
-    <Layout>
-      <Suspense fallback={<Loader />}>
+      <Layout>
+        <Toaster position="top-right" reverseOrder={false} />
+        <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
             <Route path="/register"

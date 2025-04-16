@@ -48,13 +48,17 @@
 /* Кнопка видалення */
 .btn {
     background-color: transparent;
+    display: flex;
     border: none;
     cursor: pointer;
     padding: 6px;
     border-radius: 50%;
     transition: background-color 0.2s ease;
 }
-
+.btnwrapper {
+    display: flex;
+    flex-direction: column;
+}
 .btn:hover {
     background-color: var(--secondary);
 }

@@ -7,11 +7,10 @@ import Loader from "../../components/Loader/Loader";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/contacts/operations';
-import { selectContacts, selectIsLoading} from '../../redux/contacts/selectors';
+import { selectIsLoading} from '../../redux/contacts/selectors';
 
 export default function App() {
   // Використовується useSelector для отримання значення властивостей з Redux-стану.
-  const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
 
 
