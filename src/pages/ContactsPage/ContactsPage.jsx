@@ -17,7 +17,6 @@ export default function ContactsPage() {
   }, [dispatch]);
 
     return (
-    
         <Container maxWidth="xs" sx={{ mt: 4 }}>
             <Paper elevation={3} sx={{ p: 4 }}>
       <Typography variant="h3" gutterBottom>

@@ -14,7 +14,7 @@ export default function AppBar() {
 
   return (
     <MuiAppBar position="static" color="primary" elevation={3}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', py: 2 }}>
           <Navigation />
           <Box>

@@ -13,13 +13,13 @@ const SearchBox = () => {
 
   return (
     <Box sx={{ my: 2 }}>
-      <Typography variant="body1" mb={1}>Find contacts by name</Typography>
+      <Typography variant="body1" mb={1}>Find contacts by name or number</Typography>
       <TextField
         fullWidth
         variant="outlined"
         value={valueFilter}
         onChange={handleInput}
-        placeholder="Enter name"
+        placeholder="Enter name or number"
       />
     </Box>
   );

@@ -22,7 +22,6 @@ export default function Navigation() {
       <Button
         component={NavLink}
         to="/"
-        
         sx={linkStyle}
       >
         Home
@@ -31,7 +30,6 @@ export default function Navigation() {
         <Button
           component={NavLink}
           to="/contacts"
-          
           sx={linkStyle}
         >
           Contacts
