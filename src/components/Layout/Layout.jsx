@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 export default function Layout({ children }) {
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <AppBar />
       <Box mt={4}>{children}</Box>
     </Container>
