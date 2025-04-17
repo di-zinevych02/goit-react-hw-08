@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../redux/auth/selectors';
 import { logOut } from '../../redux/auth/operations';
-import css from './UserMenu.module.css';
+import { Typography, Button, Stack } from '@mui/material';
 
 export default function UserMenu() {
-    const dispatch = useDispatch();
-// беремо частинку даних стану користувача і малюємо в інтерфейсі(знизу)
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
   const handleLogout = () => {
@@ -13,11 +12,14 @@ export default function UserMenu() {
   };
 
   return (
-    <div className={css.wrapper}>
-      <p className={css.username}>Welcome, {user.name}</p>
-      <button type="button" onClick={handleLogout}>
+    <Stack direction="row" alignItems="center" spacing={2}>
+      <Typography variant="body1" sx={{ fontWeight: 500 }}>
+        Welcome, {user.name}
+      </Typography>
+      <Button variant="outlined" color="secondary" onClick={handleLogout}>
         Logout
-      </button>
-    </div>
+      </Button>
+    </Stack>
   );
 }
+//Stack — замість ul, div, для гнучкого горизонтального/вертикального розміщення

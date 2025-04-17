@@ -1,32 +1,42 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import clsx from "clsx";
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
-import css from './Navigation.module.css';
+import { Button, Stack } from '@mui/material';
 
-const getLinkStyles = ({ isActive }) => {
-  return clsx(css.link, isActive && css.active);
-};
-
+const linkStyle = {
+  textTransform: 'none',
+  color: 'text.primary',
+  '&.active': {
+    fontWeight: 'bold',
+    color: 'primary.main',
+    borderBottom: '2px solid',
+    borderColor: 'primary.main',
+    borderRadius: 0,
+  },
+}; 
 export default function Navigation() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-//рендер за умови, сторінка контактів приватна, тому відображається тільки тоді коли користувач залогінений
+
   return (
-      <nav className={css.nav}>
-            <ul className={css.list}>
-      <li className={css.item}>
-      <NavLink className={getLinkStyles} to="/">
+    <Stack direction="row" spacing={2}>
+      <Button
+        component={NavLink}
+        to="/"
+        
+        sx={linkStyle}
+      >
         Home
-      </NavLink>
-      </li>
-              {isLoggedIn && (
-                   <li className={css.item}>
-        <NavLink className={getLinkStyles} to="/contacts">
+      </Button>
+      {isLoggedIn && (
+        <Button
+          component={NavLink}
+          to="/contacts"
+          
+          sx={linkStyle}
+        >
           Contacts
-                  </NavLink>
-                  </li>
-              )}
-          </ul>
-    </nav>
+        </Button>
+      )}
+    </Stack>
   );
 }

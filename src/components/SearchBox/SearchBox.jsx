@@ -1,7 +1,7 @@
-import css from "./SearchBox.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilterValue } from "../../redux/filters/selectors";
-import { changeFilter} from "../../redux/filters/slice";
+import { changeFilter } from "../../redux/filters/slice";
+import { TextField, Box, Typography } from '@mui/material';
 
 const SearchBox = () => {
   const dispatch = useDispatch();
@@ -12,11 +12,17 @@ const SearchBox = () => {
   };
 
   return (
-    <div className={css.filter}>
-      <span className={css.findcontact}>Find contacts by name</span>
-      <input className={css.inputcontact} value={valueFilter} type="text"  onChange={handleInput}/> 
-    </div>
+    <Box sx={{ my: 2 }}>
+      <Typography variant="body1" mb={1}>Find contacts by name</Typography>
+      <TextField
+        fullWidth
+        variant="outlined"
+        value={valueFilter}
+        onChange={handleInput}
+        placeholder="Enter name"
+      />
+    </Box>
   );
 };
+
 export default SearchBox;
-////Обробник onChange реалізований для оновлення батьківського компоненту новим значенням пошуку.

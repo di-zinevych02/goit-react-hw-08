@@ -1,27 +1,16 @@
-import Modal from "react-modal";
-import css from "./DeleteModalWindow.module.css";
-Modal.setAppElement('#root');
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from '@mui/material';
+
 export default function DeleteModalWindow({ isOpen, onConfirm, onCancel, contactName }) {
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onCancel}
-      contentLabel="Confirm Delete"
-      className={css.modal}
-      overlayClassName={css.overlay}
-    >
-      <h2 className={css.title}>Delete Contact</h2>
-      <p className={css.text}>
-        Are you sure you want to delete <strong>{contactName}</strong>?
-      </p>
-      <div className={css.actions}>
-        <button onClick={onConfirm} className={css.confirmBtn}>
-          Yes, delete
-        </button>
-        <button onClick={onCancel} className={css.cancelBtn}>
-          Cancel
-        </button>
-      </div>
-    </Modal>
+    <Dialog open={isOpen} onClose={onCancel}>
+      <DialogTitle>Delete Contact</DialogTitle>
+      <DialogContent>
+        <Typography>Are you sure you want to delete <strong>{contactName}</strong>?</Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onCancel} color="secondary">Cancel</Button>
+        <Button onClick={onConfirm} color="primary" variant="contained">Yes, delete</Button>
+      </DialogActions>
+    </Dialog>
   );
 }

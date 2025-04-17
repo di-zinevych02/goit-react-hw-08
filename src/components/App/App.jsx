@@ -1,6 +1,7 @@
 
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { CssBaseline, Container } from '@mui/material';
 import { Toaster } from "react-hot-toast";
 import Layout from '../Layout/Layout';
 import Loader from "../Loader/Loader";
@@ -25,29 +26,47 @@ export default function App() {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
+  
+  //<CssBaseline /> для нормалізації стилів у Material UI
+  //Додано Container для обгортки контенту (адаптивна ширина, відступ зверху).
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
-      <Layout>
-        <Toaster position="top-right" reverseOrder={false} />
-        <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-            <Route path="/register"
-              element={<RestrictedRoute component={<RegisterPage />} redirectTo="/contacts" />
-            } />
-            
-            <Route path="/login"
-              element={<RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />
-              } />
-            <Route path="/contacts"
-              element={<PrivateRoute component={<ContactsPage />} redirectTo="/login" />
-            } />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </Layout>
+  return (
+    <>
+      <CssBaseline />
+      <Toaster position="top-right" reverseOrder={false} />
+      {isRefreshing ? (
+        <Loader />
+      ) : (
+        <Layout>
+          <Container maxWidth="md" sx={{ mt: 4 }}>
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route
+                  path="/register"
+                  element={
+                    <RestrictedRoute component={<RegisterPage />} redirectTo="/contacts" />
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />
+                  }
+                />
+                <Route
+                  path="/contacts"
+                  element={
+                    <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
+                  }
+                />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </Container>
+        </Layout>
+      )}
+    </>
   );
 }
          

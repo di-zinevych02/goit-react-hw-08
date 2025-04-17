@@ -1,27 +1,38 @@
 import { NavLink } from "react-router-dom";
-import css from "./AuthNav.module.css";
-import clsx from "clsx";
-const getLinkStyles = ({ isActive }) => {
-  return clsx(css.link, isActive && css.active);
-};
+import { Button, Stack } from "@mui/material";
 
+const linkStyle = {
+  textTransform: 'none',
+  color: 'text.primary',
+  '&.active': {
+    fontWeight: 'bold',
+    color: 'primary.main',
+    borderBottom: '2px solid',
+    borderColor: 'primary.main',
+    borderRadius: 0,
+  },
+}; 
 export default function AuthNav() {
   return (
-      <div>
-          <nav className={css.nav}>
-              <ul className={css.list}>
-                  <li className={css.item}>
-      <NavLink className={getLinkStyles} to="/register">
+    <Stack direction="row" spacing={2}>
+      <Button
+        component={NavLink}
+        to="/register"
+        variant="outlined"
+        color="secondary"
+        sx={linkStyle}
+      >
         Register
-                      </NavLink>
-                  </li>
-                  <li className={css.item}>
-      <NavLink className={getLinkStyles}to="/login">
+      </Button>
+      <Button
+        component={NavLink}
+        to="/login"
+        variant="contained"
+        color="secondary"
+        sx={linkStyle}
+      >
         Log In
-                      </NavLink>
-                      </li>
-              </ul>
-</nav>
-    </div>
+      </Button>
+    </Stack>
   );
 }

@@ -1,11 +1,15 @@
 import LoginForm from "../../components/LoginForm/LoginForm";
-import css from "./LoginPage.module.css"
+import { Container, Typography, Paper } from "@mui/material";
 
 export default function LoginPage() {
   return (
-    <div>
-      <h2 className={css}>Please log in</h2>
-      <LoginForm />
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Paper elevation={3} sx={{ p: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Please log in
+        </Typography>
+        <LoginForm />
+      </Paper>
+    </Container>
   );
 }

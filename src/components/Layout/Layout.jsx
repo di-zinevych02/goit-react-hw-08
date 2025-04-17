@@ -1,11 +1,12 @@
 import AppBar from "../AppBar/AppBar";
-import css from "./Layout.module.css";
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 export default function Layout({ children }) {
   return (
-    <div className={css.container}>
+    <Container maxWidth="md">
       <AppBar />
-      {children}
-    </div>
+      <Box mt={4}>{children}</Box>
+    </Container>
   );
 }

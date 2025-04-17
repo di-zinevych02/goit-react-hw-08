@@ -1,21 +1,26 @@
 import { useSelector } from 'react-redux';
 import Contact from "../Contact/Contact";
-import css from "./ContactList.module.css";
-import {selectVisibleContacts} from "../../redux/contacts/selectors";
+import { selectVisibleContacts } from "../../redux/contacts/selectors";
+import { List, ListItem, Typography, Box } from '@mui/material';
+
 export default function ContactList() {
-    const contacts = useSelector(selectVisibleContacts);
-    return (
-    <>
-       {contacts.length ? (
-      <ul className={css.contactslist}>
-              {contacts.map((contact) => (
-                  <li className={css.item} key={contact.id}>
-                   <Contact data={contact} />
-               </li>
-                  ))}
-           </ul>
-              ) : (<p  className={css.nocontacts}>No contacts found</p>
-          )}
-   </>
+  const contacts = useSelector(selectVisibleContacts);
+
+  return (
+    <Box>
+      {contacts.length ? (
+        <List sx={{ mt: 2 }}>
+          {contacts.map((contact) => (
+            <ListItem key={contact.id} disablePadding>
+              <Contact data={contact} />
+            </ListItem>
+          ))}
+        </List>
+      ) : (
+        <Typography variant="body1" color="text.secondary" mt={2}>
+          No contacts found
+        </Typography>
+      )}
+    </Box>
   );
 }

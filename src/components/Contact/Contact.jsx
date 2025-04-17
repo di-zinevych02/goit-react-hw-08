@@ -1,70 +1,72 @@
-import css from "./Contact.module.css";
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteContact, updateContact } from "../../redux/contacts/operations";
+import DeleteModalWindow from "../DeleteModalWindow/DeleteModalWindow";
+import EditModalWindow from "../EditModalWindow/EditModalWindow";
 import { CgProfile } from "react-icons/cg";
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdClose } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from "../../redux/contacts/operations";
-import DeleteModalWindow from "../DeleteModalWindow/DeleteModalWindow";
-import EditModalWindow from "../EditModalWindow/EditModalWindow";
-import { updateContact } from "../../redux/contacts/operations";
-import { FiEdit3 } from "react-icons/fi"; 
+import { FiEdit3 } from "react-icons/fi";
+import {
+  Box,
+  IconButton,
+  Paper,
+  Typography,
+  Stack,
+} from '@mui/material';
 
-const Contact = ({data}) => {
-    //повертає посилання на функцію надсилання екшенів, для того щоб сповістити що в інтерфейсі відбулась подія
+const Contact = ({ data }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const toggleModal = () => setIsModalOpen(prev => !prev);
+  const toggleEditModal = () => setIsEditModalOpen(prev => !prev);
+
   const handleConfirmDelete = () => {
     dispatch(deleteContact(data.id));
     toggleModal();
   };
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-const toggleEditModal = () => setIsEditModalOpen(prev => !prev);
 
-const handleUpdate = (id, updatedData) => {
-  dispatch(updateContact({ contactId: id, updatedData }));
-};
+  const handleUpdate = (id, updatedData) => {
+    dispatch(updateContact({ contactId: id, updatedData }));
+  };
 
   return (
     <>
-    <div className={css.container}>
-      <div className={css.text}>
-  <div className={css.row}>
-    <CgProfile className={css.icon} size="20" />
-    <p className={css.name}>{data.name}</p>
-  </div>
-  <div className={css.row}>
-    <BsTelephoneFill className={css.icon} size="20" />
-    <p className={css.number}>{data.number}</p>
-  </div>
-        </div>
-        <div className={css.btnwrapper}>
-      <button className={css.btn} onClick={() => setIsModalOpen(true)}>
-        <MdClose className={css.icon} size={24} />
-          </button>
-        </div>
-        <div className={css.btnwrapper}>
-      <button className={css.btn} onClick={() => setIsEditModalOpen(true)}>
-  <FiEdit3 className={css.icon} size={20} />
-          </button>
-          </div>
-    </div>
-
-     <DeleteModalWindow
+      <Paper sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, mb: 2, width: '100%' }} elevation={3}>
+        <Box>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <CgProfile size={20} />
+            <Typography variant="body1">{data.name}</Typography>
+          </Stack>
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <BsTelephoneFill size={20} />
+            <Typography variant="body2" color="text.secondary">{data.number}</Typography>
+          </Stack>
+        </Box>
+        <Stack direction="row" spacing={1}>
+          <IconButton onClick={toggleEditModal} color="primary">
+            <FiEdit3 />
+          </IconButton>
+          <IconButton onClick={toggleModal} color="secondary">
+            <MdClose />
+          </IconButton>
+        </Stack>
+      </Paper>
+      <DeleteModalWindow
         isOpen={isModalOpen}
         onConfirm={handleConfirmDelete}
         onCancel={toggleModal}
         contactName={data.name}
       />
       <EditModalWindow
-  isOpen={isEditModalOpen}
-  onClose={toggleEditModal}
-  contact={data}
-  onSubmit={handleUpdate}
-/>
+        isOpen={isEditModalOpen}
+        onClose={toggleEditModal}
+        contact={data}
+        onSubmit={handleUpdate}
+      />
     </>
-      
   );
 };
 

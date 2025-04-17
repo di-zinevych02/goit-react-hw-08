@@ -1,10 +1,10 @@
-import css from "./Error.module.css";
+import { Alert, AlertTitle } from '@mui/material';
+
 export default function ErrorMessage() {
   return (
-    <div className={css.error}>
-      <p className={css.texterror}>
-        Whoops there was an error, please reload the page!{" "}
-      </p>
-    </div>
+    <Alert severity="error">
+      <AlertTitle>Error</AlertTitle>
+      Whoops, there was an error — please reload the page!
+    </Alert>
   );
 }
