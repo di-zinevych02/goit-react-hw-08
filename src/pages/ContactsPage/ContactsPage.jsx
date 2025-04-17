@@ -18,7 +18,7 @@ export default function ContactsPage() {
 
     return (
     
-        <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Container maxWidth="xs" sx={{ mt: 4 }}>
             <Paper elevation={3} sx={{ p: 4 }}>
       <Typography variant="h3" gutterBottom>
         Phonebook
