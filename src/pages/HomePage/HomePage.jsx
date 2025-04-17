@@ -1,30 +1,36 @@
 import { Typography, Stack } from "@mui/material";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/selectors";
+import { Link } from 'react-router-dom';
+import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export default function HomePage() {
   const user = useSelector(selectUser);
-  const isLoggedIn = !!user?.email;
-
-  return (
-    <Stack spacing={2} alignItems="center" mt={6}>
-      <Typography variant="h3" component="h1" sx={{
-          fontSize: "4rem",
+    const isLoggedIn = useSelector(selectIsLoggedIn);
+    
+return (
+    <Stack spacing={4} alignItems="center" mt={8}>
+      <Typography
+        variant="h3"
+        component="h1"
+        sx={{
+          fontSize: { xs: "2.5rem", md: "4rem" },
           textAlign: 'center',
           fontWeight: "bold",
           color: "primary.main",
-          marginTop: 10,
-        }}>
-        Welcome to the Phonebook App 📱
+        }}
+      >
+        Welcome to the Phonebook App
       </Typography>
 
       {isLoggedIn ? (
-        <Typography variant="h6" color="text.secondary">
-          All set, <strong>{user.name}</strong>! Go to your contacts and start managing them easily!
+        <Typography variant="h6" color="text.secondary" textAlign="center">
+          Hi, <strong>{user.name}</strong>! Let's go to your{' '}
+          <Link to="/contacts">Phonebook</Link> !
         </Typography>
       ) : (
-        <Typography variant="h6" color="text.secondary">
-          Register or log in to your account to start using the app.
+        <Typography variant="h6" color="text.secondary" textAlign="center">
+          <Link to="/register">Register</Link> or{' '}
+          <Link to="/login">Log In</Link> quickly to use the app.
         </Typography>
       )}
     </Stack>
