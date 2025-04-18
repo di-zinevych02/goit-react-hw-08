@@ -38,7 +38,7 @@ export default function App() {
         <Loader />
       ) : (
         <Layout>
-          <Container maxWidth="md" sx={{ mt: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 4 }}>
             <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />

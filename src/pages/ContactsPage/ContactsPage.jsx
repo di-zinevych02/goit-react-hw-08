@@ -18,11 +18,15 @@ export default function ContactsPage() {
 
     return (
         <Container maxWidth="xs" sx={{ mt: 4 }}>
+                <Box display="flex" justifyContent="center" mb={2}>
+  <Typography variant="h3" gutterBottom>
+    Phonebook
+  </Typography>
+</Box>
             <Paper elevation={3} sx={{ p: 4 }}>
-      <Typography variant="h3" gutterBottom>
-        Phonebook
-      </Typography>
-      <Box mb={3}>
+
+                <Box mb={3}>
+                    <Typography variant="body1" mb={1}>Add a contact's name and phone number</Typography>
         <ContactForm />
       </Box>
       <Divider sx={{ mb: 3 }} />
